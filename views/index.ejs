@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+  <body class="bg-dark">
+    <header class="bg-primary text-light py-3">
+      <form method="POST" action="/todos/new" id="todoForm" class="container">
+        <div class="input-group mb-3">
+          <input name="title" required minlength="2" maxlength="10" id="titleInput" minlength="2" type="text"
+            class="form-control" placeholder="Todo text" aria-label="Todo text" aria-describedby="newTodo">
+          <button class="btn btn-danger" type="submit" id="newTodo">Add Todo</button>
+        </div>
+      </form>
+    </header>
+    <section id="todos" class="mt-3 p-3">
+      <% if(todos.length===0) { %>
+        <div class="mt-3 text-light">No todos available</div>
+        <% } else { for(let todo of todos) { %>
+          <div class="card">
+            <%= todo.title %>
+          </div>
+          <%}}%>
+    </section>
+    <div class="position-relative">
+    </div>
+    <script src="js/script.js"></script>
+  </body>
+
+</html>
