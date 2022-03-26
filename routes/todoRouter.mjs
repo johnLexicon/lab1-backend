@@ -6,7 +6,6 @@ const todoRouter = Router();
 todoRouter.get('/todos', (req, res) => {
   try {
     const todos = readAllTodos();
-    console.log(todos);
     res.render('index', { todos });
   } catch (err) {
     console.log(err.message);
@@ -15,7 +14,6 @@ todoRouter.get('/todos', (req, res) => {
 
 todoRouter.post('/todos/new', async (req, res) => {
   try {
-    console.log(req.body.title);
     await createTodo({ title: req.body.title });
     res.redirect('/todos');
   } catch (err) {
