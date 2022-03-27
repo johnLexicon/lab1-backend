@@ -6,7 +6,7 @@ const todoRouter = Router();
 todoRouter.get('/todos', (_, res) => {
   try {
     const todos = readAllTodos();
-    res.render('index', { todos });
+    res.render('index', { todos, page: 'home' });
   } catch (err) {
     console.log(err.message);
   }
@@ -14,7 +14,7 @@ todoRouter.get('/todos', (_, res) => {
 
 todoRouter.get('/about', (_, res) => {
   try {
-    res.render('about');
+    res.render('about', { page: 'about' });
   } catch (err) {
     console.log(err.message);
   }
