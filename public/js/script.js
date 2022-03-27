@@ -39,3 +39,7 @@ todosSectionElem.addEventListener('click', (e) => {
     toggleTodo(todoId, JSON.parse(e.target.dataset['status']));
   }
 });
+
+window.addEventListener('load', () => {
+  document.forms[0].title.focus();
+});
