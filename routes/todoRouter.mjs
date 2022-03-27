@@ -3,10 +3,18 @@ import { readAllTodos, createTodo } from '../repositories/lowdbService.mjs';
 
 const todoRouter = Router();
 
-todoRouter.get('/todos', (req, res) => {
+todoRouter.get('/todos', (_, res) => {
   try {
     const todos = readAllTodos();
     res.render('index', { todos });
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
+todoRouter.get('/about', (_, res) => {
+  try {
+    res.render('about');
   } catch (err) {
     console.log(err.message);
   }
