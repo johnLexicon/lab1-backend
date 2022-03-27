@@ -11,7 +11,20 @@ const removeTodo = async (todoId) => {
   }
 };
 
-const toggleTodo = async (e) => {};
+const toggleTodo = async (todoId, completed) => {
+  try {
+    await fetch(`/api/todos/${todoId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({ completed: !completed })
+    });
+    window.location.reload();
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 todosSectionElem.addEventListener('click', (e) => {
   const action =
@@ -23,7 +36,6 @@ todosSectionElem.addEventListener('click', (e) => {
   if (action === 'delete') {
     removeTodo(todoId);
   } else if (action === 'complete') {
-    //TODO: Toggle for complete todo.
-    console.log(todoId);
+    toggleTodo(todoId, JSON.parse(e.target.dataset['status']));
   }
 });
