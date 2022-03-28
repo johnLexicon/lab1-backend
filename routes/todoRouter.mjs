@@ -3,7 +3,7 @@ import { readAllTodos, createTodo } from '../repositories/lowdbService.mjs';
 
 const todoRouter = Router();
 
-todoRouter.get('/todos', (_, res) => {
+todoRouter.get('/home', (_, res) => {
   try {
     const todos = readAllTodos();
     res.render('index', { todos, page: 'home' });
@@ -23,7 +23,7 @@ todoRouter.get('/about', (_, res) => {
 todoRouter.post('/todos/new', async (req, res) => {
   try {
     await createTodo({ title: req.body.title });
-    res.redirect('/todos');
+    res.redirect('/home');
   } catch (err) {
     console.log(err.message);
     res.status(500).json({ errMessage: err.message });

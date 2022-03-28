@@ -5,7 +5,7 @@ const removeTodo = async (todoId) => {
     await fetch(`/api/todos/${todoId}`, {
       method: 'DELETE'
     });
-    window.location.reload();
+    window.location.href = window.location.pathname;
   } catch (err) {
     console.log(err);
   }
@@ -20,7 +20,7 @@ const toggleTodo = async (todoId, completed) => {
       },
       body: JSON.stringify({ completed: !completed })
     });
-    window.location.reload();
+    window.location.href = window.location.pathname;
   } catch (err) {
     console.log(err);
   }
