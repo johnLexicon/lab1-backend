@@ -3,8 +3,8 @@ import {
   createTodo,
   readAllTodos,
   readTodo,
-  updateTodo,
-  deleteTodo
+  deleteTodo,
+  patchTodo
 } from '../repositories/lowdbService.mjs';
 
 const apiRouter = Router();
@@ -43,9 +43,9 @@ apiRouter.post('/', async (req, res) => {
   }
 });
 
-apiRouter.put('/', async (req, res) => {
+apiRouter.patch('/:id', async (req, res) => {
   try {
-    const updatedTodo = await updateTodo(req.body);
+    const updatedTodo = await patchTodo(req.params.id, req.body);
     if (!updatedTodo) {
       return res.status(404).json({ message: 'Todo not found' });
     }
@@ -60,7 +60,7 @@ apiRouter.delete('/:id', async (req, res) => {
   try {
     const todoId = req.params.id;
     await deleteTodo(todoId);
-    res.status(201).json({ message: `Deleted todo with id: ${todoId}` });
+    res.status(204).json({ message: `Deleted todo: ${todoId}` });
   } catch (err) {
     console.log(err.message);
     res.status(500).json({ errorMessage: err.message });

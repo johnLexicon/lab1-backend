@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+  <%- include('./partials/navbar.ejs') %>
+
+    <body class="bg-dark text-light">
+      <div class="container mt-5">
+        <h1 class="title">Laboration 1 Backend</h1>
+        <p class="about-text">
+          A server rendered Todo application.
+          The application fetches the whole page everytime a change is made e.g when
+          adding a todo, toggling complete and deleting a todo.
+        <h3 class="subtitle">Technologies used</h3>
+
+        <ul>
+          <li>Express.js</li>
+          <li>Lowdb</li>
+          <li>EJS</li>
+          <li>Bootstrap</li>
+        </ul>
+        </p>
+      </div>
+      <%- include('./partials/scripts.ejs') %>
+    </body>
+
+</html>

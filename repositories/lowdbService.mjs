@@ -14,7 +14,12 @@ db.data ||= { todos: [] };
 
 const createTodo = async (todo) => {
   const { todos } = db.data;
-  const todoCopy = { ...todo, id: nanoid() };
+  const todoCopy = {
+    ...todo,
+    id: nanoid(),
+    completed: false,
+    created: Date.now()
+  };
   todos.push(todoCopy);
   await db.write();
   return todoCopy;
@@ -31,20 +36,16 @@ const readTodo = (todoId) => {
   return foundTodo;
 };
 
-const updateTodo = async (todo) => {
-  const exists = db.data.todos.some((t) => t.id === todo.id);
-  if (!exists) {
-    return null;
-  }
-
-  const updatedTodos = db.data.todos.map((t) => {
-    if (t.id === todo.id) return todo;
-    return t;
+const patchTodo = async (todoId, changes) => {
+  const updatedTodos = db.data.todos.map((todo) => {
+    if (todo.id === todoId) {
+      return { ...todo, ...changes };
+    }
+    return todo;
   });
   db.data.todos = updatedTodos;
   await db.write();
-
-  return todo;
+  return db.data.todos.find((todo) => todo.id === todoId);
 };
 
 const deleteTodo = async (todoId) => {
@@ -53,4 +54,4 @@ const deleteTodo = async (todoId) => {
   await db.write();
 };
 
-export { createTodo, readAllTodos, readTodo, deleteTodo, updateTodo };
+export { createTodo, readAllTodos, readTodo, deleteTodo, patchTodo };
