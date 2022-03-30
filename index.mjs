@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/', todoRouter);
+app.use('/todos', todoRouter);
 app.use('/api/todos', apiRouter);
 
 const PORT = process.env.PORT || 9999;
